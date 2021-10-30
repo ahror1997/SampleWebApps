@@ -1,0 +1,61 @@
+﻿@model News.Models.Post
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card ">
+            <div class="card-header bg-primary text-white">
+                <h3 class="card-title d-inline">
+                    <i class="fa fa-fw fa-crosshairs"></i> Create a new post
+                </h3>
+            </div>
+            <div class="card-body">
+                <form role="form" asp-action="Create" asp-controller="Post" method="post" enctype="multipart/form-data" asp-antiforgery="true">
+                    <div class="validation" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label asp-for="CategoryId" class="control-label">Select category for post</label>
+                        <select id="select21" asp-for="CategoryId" class="form-control select2" style="width:100%">
+                            @foreach (var category in ViewBag.Categories)
+                            {
+                                <option value="@category.Id">@category.Title</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label">Title</label>
+                        <input asp-for="Title" class="form-control" id="input-text" placeholder="...">
+                        <span asp-validation-for="Title" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Content" class="control-label">Content</label>
+                        <textarea asp-for="Content" class="form-control" rows="5" placeholder=".....">
+                        </textarea>
+                        <span asp-validation-for="Content" style="color:red"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Photo" class="control-label">Photo</label>
+                        <input asp-for="Photo" type="file" class="form-control">
+                        <span asp-validation-for="Photo" style="color:red"></span>
+                    </div>
+                    <div class="col-md-6 col-sm-6">
+                        <button type="submit" class="btn btn-labeled btn-success mb-3">
+                            <span class="btn-label">
+                                <i class="fa fa-check"></i>
+                            </span> Save
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
